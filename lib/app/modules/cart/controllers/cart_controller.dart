@@ -12,7 +12,9 @@ class CartController extends GetxController {
   var negara = ''.obs;
   var nomorkartu = ''.obs;
   var tanggalExpired = ''.obs;
+   var age = ''.obs;
   var totalHarga = 0.0.obs;
+ 
 
   final List<String> memberList = [
     'Reguler',
@@ -39,6 +41,14 @@ class CartController extends GetxController {
     if (picked != null) {
       final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
       selectedDate.value = formattedDate;
+
+      final birthDate = picked;
+      final currentDate = DateTime.now();
+      final ageValue = currentDate.year -
+          birthDate.year + (currentDate.month > birthDate.month ||
+          (currentDate.month == birthDate.month && currentDate.day >= birthDate.day)? 0: -1);
+      // Set nilai umur
+      age.value = ageValue.toString();
     }
   }
 
@@ -51,7 +61,10 @@ class CartController extends GetxController {
     );
 
     if (picked != null) {
-      final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+
+       final expiredDate = picked.add(Duration(days: 7));
+
+      final formattedDate = DateFormat('yyyy-MM-dd').format(expiredDate);
       tanggalExpired.value = formattedDate;
     }
   }

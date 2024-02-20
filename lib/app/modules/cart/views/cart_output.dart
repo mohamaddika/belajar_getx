@@ -18,6 +18,9 @@ class cartOutput extends StatelessWidget {
             Text('Nama Lengkap: ${controller.namalengkap.value}'),
             Text('Tempat Lahir: ${controller.tempatlahir.value}'),
             Text('Tanggal Lahir: ${controller.selectedDate.value}'),
+            Obx(() {
+              return Text('Age: ${controller.age}');
+            }),
             Text('Jenis Kelamin: ${controller.jeniskelamin.value}'),
             Text('Email: ${controller.email.value}'),
             Text('Negara: ${controller.negara.value}'),

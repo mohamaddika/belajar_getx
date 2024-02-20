@@ -89,7 +89,8 @@ class CartView extends StatelessWidget {
                     controller: TextEditingController(
                         text: controller.tanggalExpired.value),
                     onTap: () => controller.expiredDate(context),
-                  )),
+                  )
+                ),
               SizedBox(height: 16),
               Text('Payment:'),
               Obx(
