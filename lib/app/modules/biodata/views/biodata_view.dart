@@ -107,7 +107,7 @@ class BiodataView extends StatelessWidget {
               Obx(() {
                 if (biodataController.isFormSubmitted.value) {
                   return Text(
-                    'Output: ${biodataController.nama.value}, ${biodataController.selectedDate.value}, ${biodataController.agama.value}, ${biodataController.jenisKelamin.value}, ${biodataController.alamat.value}, ${biodataController.hobi}',
+                    'Output: ${biodataController.nama.value}, ${biodataController.selectedDate.value}, ${biodataController.agama}, ${biodataController.jenisKelamin.value}, ${biodataController.alamat.value}, ${biodataController.hobi}',
                     style: TextStyle(fontSize: 16.0),
                   );
                 } else {

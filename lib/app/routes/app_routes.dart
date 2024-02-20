@@ -7,6 +7,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const COUNTER = _Paths.COUNTER;
   static const BIODATA = _Paths.BIODATA;
+  static const CART = _Paths.CART;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const COUNTER = '/counter';
   static const BIODATA = '/biodata';
+  static const CART = '/cart';
 }
