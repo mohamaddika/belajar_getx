@@ -28,6 +28,7 @@ class cartOutput extends StatelessWidget {
             Text('Nomor Kartu: ${controller.nomorkartu.value}'),
             Text('Tanggal Expired: ${controller.tanggalExpired.value}'),
             Text('Harga Member: ${controller.totalHarga.value}'),
+            Text('Benefit: ${controller.benefit.value}'),
           ],
         ),
       ),

@@ -12,9 +12,9 @@ class CartController extends GetxController {
   var negara = ''.obs;
   var nomorkartu = ''.obs;
   var tanggalExpired = ''.obs;
-   var age = ''.obs;
+  var age = ''.obs;
   var totalHarga = 0.0.obs;
- 
+  var benefit = ''.obs;
 
   final List<String> memberList = [
     'Reguler',
@@ -45,8 +45,12 @@ class CartController extends GetxController {
       final birthDate = picked;
       final currentDate = DateTime.now();
       final ageValue = currentDate.year -
-          birthDate.year + (currentDate.month > birthDate.month ||
-          (currentDate.month == birthDate.month && currentDate.day >= birthDate.day)? 0: -1);
+          birthDate.year +
+          (currentDate.month > birthDate.month ||
+                  (currentDate.month == birthDate.month &&
+                      currentDate.day >= birthDate.day)
+              ? 0
+              : -1);
       // Set nilai umur
       age.value = ageValue.toString();
     }
@@ -61,8 +65,7 @@ class CartController extends GetxController {
     );
 
     if (picked != null) {
-
-       final expiredDate = picked.add(Duration(days: 7));
+      final expiredDate = picked.add(Duration(days: 7));
 
       final formattedDate = DateFormat('yyyy-MM-dd').format(expiredDate);
       tanggalExpired.value = formattedDate;
@@ -76,12 +79,16 @@ class CartController extends GetxController {
 
   double TotalHarga() {
     if (selectedMember.value == 'Reguler') {
+      benefit.value = 'Anggota 1 bulan';
       return 50000.0;
     } else if (selectedMember.value == 'Gold') {
+       benefit.value = 'Anggota 1 bulan + Cemilan';
       return 150000.0;
     } else if (selectedMember.value == 'Platinum') {
+       benefit.value = 'Anggota 2 bulan + Cemilan + Wifi';
       return 250000.0;
     } else if (selectedMember.value == 'VIP') {
+       benefit.value = 'Anggota 3 bulan + Cemilan + Wifi + Tiket Konser';
       return 500000.0;
     } else {
       return 0.0;
