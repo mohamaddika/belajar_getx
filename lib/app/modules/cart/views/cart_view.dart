@@ -35,6 +35,24 @@ class CartView extends StatelessWidget {
                   onTap: () => controller.selectDate(context),
                 ),
               ),
+              Row(
+                  children: [
+                        Obx(() => Radio(
+                              value: 'Laki-laki',
+                              groupValue: controller.jeniskelamin.value,
+                              onChanged: (value) =>
+                                  controller.jeniskelamin.value = value!,
+                            )),
+                        Text('Laki-laki'),
+                        Obx(() => Radio(
+                              value: 'Perempuan',
+                              groupValue: controller.jeniskelamin.value,
+                              onChanged: (value) =>
+                                  controller.jeniskelamin.value = value!,
+                            )),
+                        Text('Perempuan'),
+                      ],
+                    ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Email'),
                 onChanged: (value) => controller.email.value = value,
