@@ -69,8 +69,8 @@ class CartView extends StatelessWidget {
                     decoration: InputDecoration(labelText: 'Tanggal Expired'),
                     readOnly: true,
                     controller: TextEditingController(
-                        text: controller.selectedDate.value),
-                    onTap: () => controller.selectDate(context),
+                        text: controller.tanggalExpired.value),
+                    onTap: () => controller.expiredDate(context),
                   )),
               SizedBox(height: 16),
               Text('Payment:'),

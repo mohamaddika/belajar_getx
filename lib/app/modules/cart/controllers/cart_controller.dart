@@ -41,6 +41,21 @@ class CartController extends GetxController {
     }
   }
 
+
+  Future<void> expiredDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null) {
+      final formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      tanggalExpired.value = formattedDate;
+    }
+  }
+
   void toggleMember(String memberValue) {
     selectedMember.value = memberValue;
     totalHarga.value = TotalHarga();
