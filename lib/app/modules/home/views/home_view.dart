@@ -51,7 +51,7 @@ class HomeView extends GetView<HomeController> {
                 Get.toNamed('/login');
               },
               child: Text("Pindah ke halaman Login"),
-            ) 
+            )
           ],
         ),
       ),

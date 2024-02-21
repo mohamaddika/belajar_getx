@@ -27,6 +27,7 @@ class RegisterController extends GetxController {
   void onPasswordChanged(String value) {
     password.value = value;
   }
+
   void onconfirmPassword(String value) {
     confirmPassword.value = value;
   }
@@ -38,7 +39,7 @@ class RegisterController extends GetxController {
 
       if (response.statusCode == 201 && responseBody['success'] == true) {
         // Registration successful
-        Get.offAllNamed('/bottom-menu'); // Redirect to login page
+        Get.offAllNamed('/login'); // Redirect to login page
         Get.snackbar('Success', 'Registration successful');
       } else {
         // Registration failed, handle the error
@@ -52,11 +53,11 @@ class RegisterController extends GetxController {
     }
   }
 
-
   Future<http.Response> _performRegister() async {
     var apiUrl = '/register'; // Sesuaikan dengan endpoint registrasi Anda
     var requestBody = {
-      'name': name.value, // Ubah dengan variabel name yang sesuai dengan implementasi Anda
+      'name': name
+          .value, // Ubah dengan variabel name yang sesuai dengan implementasi Anda
       'email': email.value,
       'password': password.value,
       'password_confirmation': confirmPassword.value,
@@ -69,8 +70,13 @@ class RegisterController extends GetxController {
     );
   }
 
-  void _saveUserData(Map<String, dynamic> responseBody) async {
+   void _saveUserData(Map<String, dynamic> responseBody) async {
     // Implementation for saving user data to SharedPreferences
     // This could be similar to what you did in the LoginController
+  }
+
+  void goToLogin() {
+    // user get.name
+    Get.toNamed('/login');
   }
 }
