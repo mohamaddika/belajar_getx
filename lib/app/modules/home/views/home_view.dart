@@ -26,31 +26,31 @@ class HomeView extends GetView<HomeController> {
               onPressed: () {
                 Get.toNamed('/profile');
               },
-              child: Text("Pindah Ke halaman Profil"),
+              child: Text("Halaman Profil"),
             ),
             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/counter');
               },
-              child: Text("Pindah ke halaman Counter"),
+              child: Text("Halaman Counter"),
             ),
             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/biodata');
               },
-              child: Text("Pindah ke halaman Biodata"),
+              child: Text("Halaman Biodata"),
             ),
             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/cart');
               },
-              child: Text("Pindah ke halaman invoice"),
+              child: Text("Halaman invoice"),
             ),
              ElevatedButton(
               onPressed: () {
                 Get.toNamed('/login');
               },
-              child: Text("Pindah ke halaman Login"),
+              child: Text("Halaman Login"),
             )
           ],
         ),

@@ -32,7 +32,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => ProfilView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
