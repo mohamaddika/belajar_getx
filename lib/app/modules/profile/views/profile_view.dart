@@ -37,10 +37,6 @@ class ProfileView extends GetView<ProfileController> {
                     style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    'Role: ${controller.user['role']}',
-                    style: TextStyle(fontSize: 18),
-                  ),
                 ],
               ),
               ),
