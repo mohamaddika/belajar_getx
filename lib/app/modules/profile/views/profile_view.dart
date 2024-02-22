@@ -36,6 +36,10 @@ class ProfileView extends GetView<ProfileController> {
                     'Email: ${controller.user['email']}',
                     style: TextStyle(fontSize: 18),
                   ),
+                  Text(
+                    'Role: ${controller.user['role']}',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   SizedBox(height: 8),
                 ],
               ),

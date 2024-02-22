@@ -1,16 +1,14 @@
 import 'dart:convert';
-
 import 'package:getx_belajar/app/data/models/kategori_model.dart';
+import 'package:getx_belajar/app/modules/kategori/views/edit_kategori_views.dart';
 import 'package:getx_belajar/app/modules/kategori/views/show_kategori_views.dart';
 import 'package:getx_belajar/app/providers/api.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:getx_belajar/app/routes/app_pages.dart';
-import '../views/show_kategori_views.dart';
 
-class KategoriController extends GetxController {
-  var kategoriList = <Kategori>[].obs;
+class PemilihanController extends GetxController {
+  var pemilihanList = <Pemilihan>[].obs;
 
   @override
   void onInit() {
@@ -20,7 +18,7 @@ class KategoriController extends GetxController {
 
   Future<void> fetchData() async {
     try {
-      var apiUrl = '${Api.baseUrl}/kategori';
+      var apiUrl = '${Api.baseUrl}/pemilihan';
       var headers = await Api.getHeaders();
 
       var response = await http.get(
@@ -29,14 +27,14 @@ class KategoriController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        Iterable jsonResponse = json.decode(response.body)['data']['data'];
-        kategoriList
-            .assignAll(jsonResponse.map((model) => Kategori.fromJson(model)));
+        Iterable jsonResponse = json.decode(response.body);
+        pemilihanList
+            .assignAll(jsonResponse.map((model) => Pemilihan.fromJson(model)));
       } else {
-        throw Exception('Failed to load pasien');
+        throw Exception('Failed to load pemilihan');
       }
     } catch (e) {
-      print('Error during fetching pasien: $e');
+      print('Error during fetching pemilihan: $e');
     }
   }
 
@@ -76,10 +74,14 @@ class KategoriController extends GetxController {
     }
   }
 
+  void deletepemilihan(Pemilihan pemilihan) {}
+
+  void tambahPemilihan(String text, String value, String text2) {}
+
   // edit pasien
-  Future<void> editKategori(
-    Kategori kategori,
-    String title,
+  Future<void> EditPemilihanView(
+    Pemilihan pemilihan,
+    String title, String text, [String? text1]
   ) async {
     try {
       if (title.isEmpty) {
@@ -87,7 +89,7 @@ class KategoriController extends GetxController {
         return;
       }
 
-      var apiUrl = '${Api.baseUrl}/kategori/${kategori.id}';
+      var apiUrl = '${Api.baseUrl}/kategori/${pemilihan.id}';
       var headers = await Api.getHeaders();
 
       var response = await http.put(
@@ -100,10 +102,10 @@ class KategoriController extends GetxController {
 
       if (response.statusCode == 200) {
         Get.snackbar('Sukses', 'Kategori berhasil diubah');
-        fetchData(); // Refresh the kategoriList
+        fetchData(); // Refresh the pemilihanList
         Get.offAndToNamed(Routes.BOTTOM_MENU);
       } else {
-        throw Exception('Failed to edit pasien');
+        throw Exception('Failed to edit pemilihan');
       }
     } catch (e) {
       print('Error during edit pasien: $e');
@@ -111,14 +113,14 @@ class KategoriController extends GetxController {
   }
 
   // show pasien
-    void showKategoriDetails(Kategori kategori) {
-      Get.to(() => DetailKategoriView(kategori: kategori));
-    }
+  void showKategoriDetails(Pemilihan pemilihan) {
+    Get.to(() => DetailPemilihanView(pemilihan: pemilihan));
+  }
 
-    // delete pasien
-  Future<void> deleteKategori(Kategori kategori) async {
+  // delete pasien
+  Future<void> deletePemilihan(Pemilihan pemilihan) async {
     try {
-      var apiUrl = '${Api.baseUrl}/kategori/${kategori.id}';
+      var apiUrl = '${Api.baseUrl}/kategori/${pemilihan.id}';
       var headers = await Api.getHeaders();
 
       var response = await http.delete(
@@ -127,15 +129,14 @@ class KategoriController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        Get.snackbar('Sukses', 'Kategori berhasil dihapus');
+        Get.snackbar('Sukses', 'Pemilihan berhasil dihapus');
         fetchData();
         // Optionally, you can navigate to a different page after deletion
       } else {
-        throw Exception('Failed to delete Kategori');
+        throw Exception('Failed to delete Pemilihan');
       }
     } catch (e) {
-      print('Error during delete Kategori: $e');
+      print('Error during delete Pemilihan: $e');
     }
   }
-
 }

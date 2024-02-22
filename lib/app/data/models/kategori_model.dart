@@ -1,19 +1,38 @@
-class Kategori {
-  int id;
-  String title;
-  // String image;
+class Pemilihan {
+  int? id;
+  String? namaPemilihan;
+  String? deskripsi;
+  String? status;
+  Null? createdAt;
+  Null? updatedAt;
 
-  Kategori({
-    required this.id,
-    required this.title,
-    // required this.image,
-  });
+  Pemilihan(
+      {this.id,
+      this.namaPemilihan,
+      this.deskripsi,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
 
-  factory Kategori.fromJson(Map<String, dynamic> json) {
-    return Kategori(
-      id: json['id'],
-      title: json['title'],
-      // image: json['image'],
-    );
+  Pemilihan.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    namaPemilihan = json['nama_pemilihan'];
+    deskripsi = json['deskripsi'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  set isEditable(bool isEditable) {}
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['nama_pemilihan'] = this.namaPemilihan;
+    data['deskripsi'] = this.deskripsi;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
   }
 }

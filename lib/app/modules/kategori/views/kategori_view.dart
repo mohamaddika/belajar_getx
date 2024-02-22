@@ -2,86 +2,86 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_belajar/app/data/models/kategori_model.dart';
 import 'package:getx_belajar/app/modules/kategori/views/create_kategori_views.dart';
-import '../../pasien/views/edit_kategori_views.dart';
-import '../../pasien/views/show_kategori_views.dart';
+import 'package:getx_belajar/app/modules/kategori/views/edit_kategori_views.dart';
+import 'package:getx_belajar/app/modules/kategori/views/show_kategori_views.dart';
 import '../controllers/kategori_controller.dart';
 
-class KategoriView extends StatelessWidget {
-  final KategoriController controller = Get.put(KategoriController());
+class PemilihanView extends StatelessWidget {
+  final PemilihanController controller = Get.put(PemilihanController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Kategori'),
+        title: Text('Daftar Pemilihan'),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Get.to(() => TambahKategoriView());
+              Get.to(TambahPemilihanView());
+              // Get.toNamed('/tambah-pemilihan');
             },
           ),
         ],
       ),
       body: Obx(
-        () {
-          if (controller.kategoriList.isEmpty) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            // Print data dari API kategori sebelum menampilkan dalam ListView
-            for (var kategori in controller.kategoriList) {
-              print('Kategori: ${kategori.title}');
-            }
-
-            return ListView.builder(
-              itemCount: controller.kategoriList.length,
-              itemBuilder: (context, index) {
-                var kategori = controller.kategoriList[index];
-                return ListTile(
-                  title: Row(
-                    children: [
-                      Expanded(
-                        child: Text(kategori.title),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Get.to(() => EditKategoriView(kategori: kategori));
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.visibility),
-                        onPressed: () {
-                          Get.to(() => DetailKategoriView(kategori: kategori));
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          showDeleteConfirmation(context, kategori);
-                        },
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-
-                  },
-                );
-              },
-            );
-          }
-        },
+        () => controller.pemilihanList.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: controller.pemilihanList.length,
+                itemBuilder: (context, index) {
+                  var pemilihan = controller.pemilihanList[index];
+                  return ListTile(
+                    title: Row(
+                      children: [
+                        Expanded(
+                          child: Text(pemilihan.namaPemilihan.toString()),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            Get.to(
+                                () => EditPemilihanView(pemilihan: pemilihan));
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.visibility),
+                          onPressed: () {
+                            Get.to(() =>
+                                DetailPemilihanView(pemilihan: pemilihan));
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            // Show a confirmation dialog before deleting
+                            showDeleteConfirmation(context, pemilihan);
+                          },
+                        ),
+                      ],
+                    ),
+                    subtitle: Text(pemilihan.deskripsi.toString()),
+                    onTap: () {
+                      // Pass the 'isEditable' flag to indicate whether it's for editing or viewing
+                      pemilihan.isEditable =
+                          true; // Set to false for 'Lihat Detail'
+                      controller.showKategoriDetails(pemilihan);
+                    },
+                  );
+                },
+              ),
       ),
     );
   }
 
-  void showDeleteConfirmation(BuildContext context, Kategori kategori) {
+  void showDeleteConfirmation(BuildContext context, Pemilihan pemilihan) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Pasien'),
-          content: Text('Are you sure you want to delete ${kategori.title}?'),
+          title: Text('Delete pemilihan'),
+          content: Text(
+              'Are you sure you want to delete ${pemilihan.namaPemilihan}?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -91,8 +91,8 @@ class KategoriView extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                // Call the deletePasien method from the controller
-                controller.deleteKategori(kategori);
+                // Call the deletepemilihan method from the controller
+                controller.deletepemilihan(pemilihan);
                 Navigator.of(context).pop(); // Close the dialog
               },
               child: Text('Delete'),
