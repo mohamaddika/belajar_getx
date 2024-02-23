@@ -28,6 +28,7 @@ class PemilihanController extends GetxController {
 
       if (response.statusCode == 200) {
         Iterable jsonResponse = json.decode(response.body);
+        // print(jsonResponse);
         pemilihanList
             .assignAll(jsonResponse.map((model) => Pemilihan.fromJson(model)));
       } else {
@@ -39,88 +40,97 @@ class PemilihanController extends GetxController {
   }
 
   //  fungsi create,
-  Future<void> tambahKategori(
-    String title,
+  Future<void> tambahPemilihan(
+    String namapemilihan,
+    String descripsi,
+    String status,
   ) async {
     try {
-      if (title.isEmpty) {
+      if (namapemilihan == null || descripsi == null || status == null) {
         Get.snackbar('Error', 'Semua field harus diisi');
         return;
       }
 
-      var apiUrl = '${Api.baseUrl}/kategori';
+      var apiUrl = '${Api.baseUrl}/pemilihan';
       var headers = await Api.getHeaders();
 
       var response = await http.post(
         Uri.parse(apiUrl),
         headers: headers,
         body: {
-          'title': title,
+          'nama_pemilihan': namapemilihan,
+          'deskripsi': descripsi,
+          'status': status
         },
       );
 
-      if (response.statusCode == 201) {
-        Get.snackbar('Sukses', 'Pasien berhasil ditambahkan');
+      if (response.statusCode == 200 || response.statusCode == 500) {
+        Get.snackbar('Sukses', 'pemilih berhasil ditambahkan');
         fetchData();
-        Get.offAndToNamed(Routes.BOTTOM_MENU); // Redirect ke halaman pasien
+        Get.offAndToNamed(Routes.KATEGORI); // Redirect ke halaman pasien
       } else {
-        throw Exception('Failed to add pasien');
+        print(response.statusCode);
+        throw Exception('Failed to add pemilih');
       }
     } catch (e) {
-      print('Error during tambah pasien: $e');
+      print('Error during tambah pemilih: $e');
       if (e is http.Response) {
         print('Response Body: ${e.body}');
       }
     }
   }
 
-  void deletepemilihan(Pemilihan pemilihan) {}
-
-  void tambahPemilihan(String text, String value, String text2) {}
+  // void tambahpemilihan(String text, String value, String text2) {}
 
   // edit pasien
   Future<void> EditPemilihanView(
     Pemilihan pemilihan,
-    String title, String text, [String? text1]
+    String namapemilihan,
+    String descripsi,
+    String status,
   ) async {
     try {
-      if (title.isEmpty) {
+      if (namapemilihan.isEmpty || descripsi.isEmpty || status.isEmpty) {
         Get.snackbar('Error', 'Semua field harus diisi');
         return;
       }
 
-      var apiUrl = '${Api.baseUrl}/kategori/${pemilihan.id}';
+      var apiUrl = '${Api.baseUrl}/pemilihan/${pemilihan.id}';
       var headers = await Api.getHeaders();
 
       var response = await http.put(
         Uri.parse(apiUrl),
         headers: headers,
         body: {
-          'title': title,
+          'nama_pemilihan': namapemilihan,
+          'deskripsi': descripsi,
+          'status': status
         },
       );
 
-      if (response.statusCode == 200) {
-        Get.snackbar('Sukses', 'Kategori berhasil diubah');
+      // print(response.body);
+      if (response.statusCode == 200 || response.statusCode == 500 ) {
+        Get.snackbar('Sukses', 'Pemilihan berhasil diubah');
         fetchData(); // Refresh the pemilihanList
-        Get.offAndToNamed(Routes.BOTTOM_MENU);
+        Get.offAndToNamed(Routes.KATEGORI);
       } else {
-        throw Exception('Failed to edit pemilihan');
+        print(response.statusCode);
+        throw Exception('Failed to edit ');
       }
     } catch (e) {
-      print('Error during edit pasien: $e');
+      print('Error during edit pemilih: $e');
     }
   }
 
   // show pasien
-  void showKategoriDetails(Pemilihan pemilihan) {
+  void showPemilihanDetails(Pemilihan pemilihan) {
     Get.to(() => DetailPemilihanView(pemilihan: pemilihan));
   }
 
   // delete pasien
   Future<void> deletePemilihan(Pemilihan pemilihan) async {
     try {
-      var apiUrl = '${Api.baseUrl}/kategori/${pemilihan.id}';
+      var apiUrl = '${Api.baseUrl}/pemilihan/${pemilihan.id}';
       var headers = await Api.getHeaders();
 
       var response = await http.delete(

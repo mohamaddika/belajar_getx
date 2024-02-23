@@ -65,7 +65,7 @@ class PemilihanView extends StatelessWidget {
                       // Pass the 'isEditable' flag to indicate whether it's for editing or viewing
                       pemilihan.isEditable =
                           true; // Set to false for 'Lihat Detail'
-                      controller.showKategoriDetails(pemilihan);
+                      controller.showPemilihanDetails(pemilihan);
                     },
                   );
                 },
@@ -92,7 +92,7 @@ class PemilihanView extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Call the deletepemilihan method from the controller
-                controller.deletepemilihan(pemilihan);
+                controller.deletePemilihan(pemilihan);
                 Navigator.of(context).pop(); // Close the dialog
               },
               child: Text('Delete'),

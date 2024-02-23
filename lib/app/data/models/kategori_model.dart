@@ -3,8 +3,8 @@ class Pemilihan {
   String? namaPemilihan;
   String? deskripsi;
   String? status;
-  Null? createdAt;
-  Null? updatedAt;
+  String? createdAt;
+  String? updatedAt;
 
   Pemilihan(
       {this.id,
@@ -33,6 +33,7 @@ class Pemilihan {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+
     return data;
   }
 }

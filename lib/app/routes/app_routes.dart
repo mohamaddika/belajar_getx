@@ -14,6 +14,7 @@ abstract class Routes {
   static const KATEGORI = _Paths.KATEGORI;
   static const BUTTOM_MENU = _Paths.BUTTOM_MENU;
   static const BOTTOM_MENU = _Paths.BOTTOM_MENU;
+  static const SPLASH = _Paths.SPLASH;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const KATEGORI = '/kategori';
   static const BUTTOM_MENU = '/buttom-menu';
   static const BOTTOM_MENU = '/bottom-menu';
+  static const SPLASH = '/splash';
 }

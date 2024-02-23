@@ -8,7 +8,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context ) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HomeView'),
@@ -18,10 +18,6 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'HomeView is working',
-              style: TextStyle(fontSize: 20),
-            ),
             ElevatedButton(
               onPressed: () {
                 Get.toNamed('/profile');

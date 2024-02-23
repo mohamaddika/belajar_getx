@@ -5,9 +5,9 @@ import '../controllers/kategori_controller.dart';
 class TambahPemilihanView extends StatelessWidget {
   final PemilihanController controller = Get.find<PemilihanController>();
   final TextEditingController namaController = TextEditingController();
-  final RxString deskripsi = ''.obs;
+  // final RxString deskripsi = ''.obs;
   final TextEditingController deskripsiController = TextEditingController();
-  final RxString status = ''.obs;
+  // final RxString status = ''.obs;
   final TextEditingController statusController = TextEditingController();
 
   @override
@@ -24,7 +24,7 @@ class TambahPemilihanView extends StatelessWidget {
               controller: namaController,
               decoration: InputDecoration(labelText: 'Nama'),
             ),
-           TextFormField(
+            TextFormField(
               controller: deskripsiController,
               decoration: InputDecoration(labelText: 'Deskripsi'),
             ),
@@ -36,11 +36,8 @@ class TambahPemilihanView extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 if (_validateInput()) {
-                  controller.tambahPemilihan(
-                    namaController.text,
-                    deskripsiController.text,
-                    statusController.text
-                  );
+                  controller.tambahPemilihan(namaController.text,
+                      deskripsiController.text, statusController.text);
                 }
               },
               child: Text('Simpan'),
@@ -52,9 +49,10 @@ class TambahPemilihanView extends StatelessWidget {
   }
 
   bool _validateInput() {
-    if (namaController.text.isEmpty ||
-        deskripsiController.text.isEmpty ||
-        statusController.text.isEmpty) {
+    if (
+      namaController.text.isEmpty ||
+      deskripsiController.text.isEmpty ||
+      statusController.text.isEmpty) {
       Get.snackbar('Error', 'Semua field harus diisi');
       return false;
     }
