@@ -25,7 +25,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.BUTTOM_MENU;
 
   static final routes = [
     GetPage(
@@ -70,9 +70,10 @@ class AppPages {
       binding: KategoriBinding(),
     ),
     GetPage(
-      name: _Paths.BOTTOM_MENU,
+      name: _Paths.BUTTOM_MENU,
       page: () => BottomMenuView(),
       binding: BottomMenuBinding(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }

@@ -31,7 +31,7 @@ class LoginController extends GetxController {
         // Login successful
         _saveUserData(responseBody);
         print('Token: ${responseBody['token']}'); // Cetak token di sini
-        Get.offAllNamed('/home'); // Navigate to the home page
+        Get.offAllNamed('/buttom-menu'); // Navigate to the home page
       } else {
         // Login failed, handle the error
         Get.snackbar('Error', 'Login failed. ${responseBody['message']}');

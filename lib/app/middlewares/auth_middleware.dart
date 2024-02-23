@@ -14,7 +14,7 @@ class AuthMiddleware extends GetMiddleware {
       });
     });
 
-    return null;
+    // return null;
   }
 
   Future<bool> _isLoggedIn() async {
